@@ -149,7 +149,7 @@ length of test_loader 79
 
 </pre>
 #### SAMPLE IMAGES IN TRAIN LOADER
-![alt text]sample images train loader
+![alt text](https://github.com/RajidiSahithi/Session_9/blob/main/Images%20S9/Sample_training_data.png)
 
 ## CNN_MODEL
 
@@ -359,7 +359,7 @@ Estimated Total Size (MB): 5.86
 * Total number of Convolution Layers = 13
 
 * Total Receptive Field is greater than 44 (49 in this case)
-![alt text]RF_FIELD
+![alt text](https://github.com/RajidiSahithi/Session_9/blob/main/Images%20S9/RF.png)
 
 # ANALYSIS:
 * Usage of albumenations is understood.
