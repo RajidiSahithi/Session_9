@@ -99,7 +99,7 @@ Syntax:
 
 Normalization is a common technique used in deep learning to scale the pixel values of an image to a standard range. This is done to ensure that the input features have similar ranges and are centered around zero. 
 Normalization is done with respect to mean and standard Deviation.
-For CIFAR10 (RGB) will have 3 means and 3 standard devivation that is equal to 
+For CIFAR10 (RGB) will have 3 means and 3 standard deviation that is equal to 
 (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
 
 Applied to training and test data
@@ -149,7 +149,7 @@ length of test_loader 79
 
 </pre>
 #### SAMPLE IMAGES IN TRAIN LOADER
-![alt text]sample images train loader
+![alt text](https://github.com/RajidiSahithi/Session_9/blob/main/Images%20S9/Sample_training_data.png)
 
 ## CNN_MODEL
 
