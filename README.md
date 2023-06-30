@@ -368,7 +368,7 @@ Estimated Total Size (MB): 6.52
 * Total number of Convolution Layers = 13
 
 * Total Receptive Field is greater than 44 (49 in this case)
-![alt text]RF_FIELD
+![alt text](https://github.com/RajidiSahithi/Session_9/blob/main/Images%20S9/RF.png)
 
 # ANALYSIS:
 * Usage of albumenations is understood.
