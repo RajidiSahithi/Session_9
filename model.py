@@ -126,5 +126,5 @@ class Net(nn.Module):
 
 def model_summary(model,input_size):
     model = Net().to(device)
-    summary(model, input_size=(1, 28, 28))
+    summary(model, input_size=(2, 32, 32))
     return model,input_size    
