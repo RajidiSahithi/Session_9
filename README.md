@@ -26,11 +26,11 @@ CIFAR-10 is an established computer-vision dataset used for object recognition. 
 
 ## IMPORTING_LIBRARIES
 Import the required libraries. 
-* NumPy is used for for numerical operations.The torch library is used to import Pytorch.
+* NumPy is used for numerical operations. The torch library is used to import Pytorch.
 * Pytorch has an nn component that is used for the abstraction of machine learning operations. 
-* The torchvision library is used so that to import the CIFAR-10 dataset. This library has many image datasets and is widely used for research. The transforms can be imported to resize the image to equal size for all the images. 
-* The optim is used train the neural Networks.
-* MATLAB libraries are imported to plot the graphs and arrange the figures with labelling
+* The torchvision library is used so that to import the CIFAR-10 dataset. This library has many image datasets and is widely used for research. The transforms can be imported to resize the image to an equal size for all the images. 
+* The optim is used to train the neural Networks.
+* MATLAB libraries are imported to plot the graphs and arrange the figures with labeling
 * Albumenations are imported for Middle Man's Data Augmentation Strategy
 * cv2 is imported 
 
@@ -39,7 +39,7 @@ Import the required libraries.
 
 * cv2.ocl.setUseOpenCL(False) disables the usage of OpenCL in OpenCV2 and is used when you want to disable the usage of OpenCL.
 
-* The  class is inherited from torchvision.datasets.CIFAR10. It overrides the __init__ and __getitem__ methods of the parent class. The __getitem__ method returns an image and its label after applying a transformation to the image3. (This is to be done while using Albumenations)
+* The  class is inherited from torchvision.datasets.CIFAR10. It overrides the __init__ and __getitem__ methods of the parent class. The __getitem__ method returns an image and its label after transforming the image3. (This is to be done while using Albumenations)
 
 
 ## DATA_AUGMENTATIONS
@@ -51,26 +51,26 @@ Middle-Class Man's Data Augmentation Strategy is used. Like
 Syntax : A.HorizontalFlip(p=0.5)
 Flip the input horizontally around the y-axis.
 Args:     
-p (float): probability of applying the transform. Default: 0.5.
+p (float): the probability of applying the transform. Default: 0.5.
 Applied only to Training data
 </pre>
 ### ShiftScaleRotate :
 <pre>
 Syntax:
 A.ShiftScaleRotate (shift_limit=0.0625, scale_limit=0.1, rotate_limit=45, p=0.5)
-Randomly apply affine transforms: translate, scale and rotate the input.
+Randomly apply affine transforms: translate, scale, and rotate the input.
 
     Args:
         shift_limit ((float, float) or float): shift factor range for both height and width. If shift_limit
             is a single float value, the range will be (-shift_limit, shift_limit). Absolute values for lower and
-            upper bounds should lie in range [0, 1]. Default: (-0.0625, 0.0625).
+            upper bounds should lie in the range [0, 1]. Default: (-0.0625, 0.0625).
         scale_limit ((float, float) or float): scaling factor range. If scale_limit is a single float value, the
             range will be (-scale_limit, scale_limit). Note that the scale_limit will be biased by 1.
             If scale_limit is a tuple, like (low, high), sampling will be done from the range (1 + low, 1 + high).
             Default: (-0.1, 0.1).
         rotate_limit ((int, int) or int): rotation range. If rotate_limit is a single int value, the
             range will be (-rotate_limit, rotate_limit). Default: (-45, 45).
-        p(float): probability of applying the transform. Default: 0.5.
+        p(float): the probability of applying the transform. Default: 0.5.
 
 Applied only to Training data
 </pre>
@@ -78,7 +78,7 @@ Applied only to Training data
 <pre>
 Syntax:
  A.CoarseDropout(max_holes = 32, max_height=16, max_width=16, min_holes = 1, min_height=16, min_width=16, fill_value=((0.4914, 0.4822, 0.4465)))
- It is similar to cutout
+ It is similar to a cutout
 
     Args:
         max_holes(int): The maximum number of rectangular regions to be masked. (for CIFAR10 Dataset its 32X32)
@@ -91,6 +91,11 @@ Syntax:
             It is usually equal to the mean of dataset for CIFAR10 its (0.4914, 0.4822, 0.4465)
        
 Applied only to Training data 
+</pre>
+### RandomBrightnessContrast
+<pre>
+    A.RandomBrightnessContrast(p=0.5)
+    Brightness and contrast are adjusted with a probability of 0.5
 </pre>
 ### Normalize
 <pre>
@@ -179,10 +184,10 @@ BLOCK1 (C1)
 </pre>
 <pre>
 BLOCK2 (C2)
-  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 all layers. (each layer has Batch Normalization, Activation Function (Relu) and droput of 1%)
+  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 for all layers. (each layer has Batch Normalization, Activation Function (Relu) and droput of 1%)
   In the last layer of this block dialation Convolution is used.
-  For using dialation Covolution we need to maintain Receptive fields and number of output channels. Padding is added based on this constraint. Stride is 1 all layers. 
-  Dialation is to be followed by a skip connection. Even the kernal size is 3 the Effcetive kernal size is 7 (when dialation = 3).
+  For using dilation Covolution we need to maintain Receptive fields and the number of output channels. Padding is added based on this constraint. Stride is 1 all layers. 
+  Dilation is to be followed by a skip connection. Even the kernel size is 3 the Effective kernel size is 7 (when dilation = 3).
   
   (conv21): Sequential(
     (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), dilation=(3, 3))
@@ -202,7 +207,7 @@ BLOCK2 (C2)
   <pre>
   BLOCK3 (C3)
 
-  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 all layers. (each layer has Batch Normalization, Activation Function (Relu) and droput of 1%)
+  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 for all layers. (each layer has Batch Normalization, Activation Function (Relu), and droput of 1%)
 
   (conv31): Sequential(
     (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1))
@@ -225,10 +230,10 @@ BLOCK2 (C2)
   </pre>
   <pre>
   BLOCK4 / OUTPUT BLOCK (C4O)
-  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 all layers. (each layer has Batch Normalization, Activation Function (Relu) and droput of 1%)
+  This Block Contains 3 Convolution layers with Kernal Size 3X3 and Stride is 1 for all layers. (each layer has Batch Normalization, Activation Function (Relu), and droput of 1%)
   In the last layer of this block dialation Convolution is used.
-  For using dialation Covolution we need to maintain Receptive fields and number of output channels. Padding is added based on this constraint. Stride is 1 all layers. 
-  Dialation is to be followed by a skip connection. Even the kernal size is 3 the Effcetive kernal size is 7 (when dialation = 3).
+  For using dilation Covolution we need to maintain Receptive fields and number of output channels. Padding is added based on this constraint. Stride is 1 all layers. 
+  Dilation is to be followed by a skip connection. Even the kernel size is 3 the Effective kernel size is 7 (when dilation = 3).
   
   (conv41): Sequential(
     (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), dilation=(3, 3))
@@ -293,9 +298,9 @@ The test function takes the model, device, and test_loader as inputs. It perform
 
 ## [RESULTS]
 
-I achieved 85% of accuracy at 50th epoch. Initially model is under fitting. As number of epochs increased it worked good.
+I achieved 85% of accuracy at the 50th epoch. Initially model is underfitting. As the number of epochs increased it worked well.
 
-I missed the screen shot of result.
+I missed the screenshot of the result.
 
 
 #### MODEL SUMMARY
@@ -373,9 +378,9 @@ Estimated Total Size (MB): 6.52
 # ANALYSIS:
 * Usage of albumenations is understood.
 * This model took more time/epoch compared to previous models.
-* Deptwise Convoltions, Dilation is used with maxpooling and striding.
+* Deptwise Convoltions, Dilation is used with max-pooling and striding.
 * This model can be trained further.
-* Acheived No of parametrs < 200K
+* Achieved No of parameters < 200K
 * Accuracy > 85%
 * RF > 44
 
